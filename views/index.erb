@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>Markdown to HTML</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <form method="POST" action="/">
+    <textarea name="markdown"><%= @markdown %></textarea>
+    <input type="submit" value="Convert"></submit>
+  </form>
+  <textarea readonly="true"><%= @html %></textarea>
+</body>
+</html>
