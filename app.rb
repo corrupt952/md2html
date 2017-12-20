@@ -10,7 +10,7 @@ configure {
   set :server, :puma
 }
 
-class SkipParagraphHTMLRender < Redcarpet::Render::HTML
+class NoParagraphHTMLRender < Redcarpet::Render::HTML
   def paragraph(text)
     "#{text}\n"
   end
@@ -22,9 +22,15 @@ class Markdown2Html < Sinatra::Base
   end
 
   post '/' do
+    renderClass = if params[:no_paragraph] == "true"
+                    NoParagraphHTMLRender
+                  else
+                    Redcarpet::Render::HTML
+                  end
     renderer = Redcarpet::Markdown.new(
-      SkipParagraphHTMLRender,
-      autolink: true, fenced_code_blocks: true
+      renderClass,
+      autolink: true,
+      fenced_code_blocks: true
     )
     json content: renderer.render(params[:markdown].to_s)
   end
