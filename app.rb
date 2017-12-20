@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'sinatra/json'
 require 'redcarpet'
 
 if development?
@@ -27,8 +28,6 @@ class Markdown2Html < Sinatra::Base
       SkipParagraphHTMLRender,
       autolink: true, fenced_code_blocks: true
     )
-    @markdown = params[:markdown].to_s
-    @html = renderer.render(@markdown)
-    erb :index
+    json content: renderer.render(params[:markdown].to_s)
   end
 end
