@@ -18,8 +18,6 @@ end
 
 class Markdown2Html < Sinatra::Base
   get '/' do
-    @markdown = ""
-    @html = ""
     erb :index
   end
 
