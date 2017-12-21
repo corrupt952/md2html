@@ -12,7 +12,7 @@ configure {
 
 class NoParagraphHTMLRender < Redcarpet::Render::HTML
   def paragraph(text)
-    "#{text}\n"
+    "\n#{text}\n"
   end
 end
 
